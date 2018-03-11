@@ -1,68 +1,100 @@
 <html lang="en">
   <head>
+
     <link rel="stylesheet" href="pen.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="assets/doodlepen-favicon.png">
     <meta name="theme-color" content="#418a23">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
     <title>Doodle Pen : An Online Realtime IDE</title>
+
   </head>
   <body>
 
     <!-- Navbar Section -->
     <div class="row no-gutters">
-    <div class="col-md-12">
-      <nav class="navbar navbar-expand-lg navbar-light" id="nav">
-        <a class="navbar-brand" href="#"><img src="assets/logo-doodlepen.png" class="img-responsive" width="200" alt="Doodle Pen" title="Doodle Pen: An Online Realtime IDE"></a><span id="master">A Pen by Paras Aggarwal and Aarti Verma</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light" id="nav">
+          <a class="navbar-brand" href="#"><img id="logo" src="assets/logo-doodlepen.png" class="img-responsive" width="200" alt="Doodle Pen" title="Doodle Pen: An Online Realtime IDE"></a><span id="master">A Pen by Paras Aggarwal and Aarti Verma</span>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#"><button class="btn" id="code-btn"><i class="fas fa-cloud"></i> &nbsp;Save</button></a>
-              </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#"><button class="btn" id="code-btn"><i class="fas fa-cog"></i> &nbsp;Settings</button></a>
+                <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn1"><i class="fas fa-cloud"></i> &nbsp;Save</button></a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#"><button class="btn" id="code-btn"><i class="fas fa-eye"></i> &nbsp;Change View</button></a>
+                <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn2"><i class="fas fa-cog"></i> &nbsp;Settings</button></a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#"><button class="btn" id="code-btn"><i class="fas fa-sign-in-alt"></i> &nbsp;Log in</button></a>
+                <div class="dropdown show">
+                  <a class="nav-link" id="dropdownChangeView" data-toggle="dropdown" aria-expanded="false"><button class="btn  dropdown-toggle code-btn" id="code-btn3"><i class="fas fa-eye"></i> &nbsp;Change View</button></a> 
+
+                  <!-- Change View Dropdown -->
+                  <div class="dropdown-menu" aria-labelledby="dropdownChangeView">
+                    <a class="dropdown-item" href="#" onclick="changeView(1)" id="wide-screen"><i class="fas fa-angle-left"></i> &nbsp;Left</a>
+
+                    <a class="dropdown-item" href="#" onclick="changeView(2)" id="wide-screen"><i class="fas fa-angle-right"></i> &nbsp;Right</a>
+
+                    <a class="dropdown-item" href="#" onclick="changeView(3)"><i class="fas fa-angle-up"></i> &nbsp;Top</a>
+                    
+                    <a class="dropdown-item" href="#" onclick="changeView(2)" id="short-screen"><i class="fas fa-angle-down"></i> &nbsp;Bottom</a>
+
+                    <div class="dropdown-divider"></div>
+                    
+                    <a class="dropdown-item" href="#" onclick="lowVision()"><i class="fas fa-moon"></i> &nbsp;Dark View</a>
+
+                    <a class="dropdown-item" href="#" onclick="fullVision()"><i class="fas fa-sun"></i> &nbsp;Light View</a>
+                  </div>
+                </div>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#"><button class="btn" id="code-btn"><i class="fas fa-user-plus"></i> &nbsp;Sign up</button></a>
+                <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn4" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i> &nbsp;Log in</button></a>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn5" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus"></i> &nbsp;Sign up</button></a>
+              </li>
+
             </ul>
-        </div>
-      </nav>
-    </div>
+          </div>
+        </nav>
+      </div>
     </div>
 
     <!-- Editor Section -->
-    <div class="row no-gutters">
+    <div class="row no-gutters" id="main-row">
       <div class="col-md-4" id="editor-area">
+
         <!-- html editor -->
         <div id="html-box">
-          <div class="heading">HTML</div>
+          <div class="heading" id="heading1">HTML</div>
           <div class="editor" id="html-editor"></div>
         </div>
         
         <!-- css editor -->
         <div id="css-box">
-          <div class="heading">CSS</div>
+          <div class="heading" id="heading2">CSS</div>
           <div class="editor" id="css-editor"></div>
         </div>  
 
         <!-- js editor -->
         <div id="js-box">
-          <div class="heading">JS</div>
+          <div class="heading" id="heading3">JS</div>
           <div class="editor" id="js-editor"></div>
         </div>
       </div>
@@ -70,7 +102,7 @@
       <!-- Preview Section -->
       <div class="col-md-8" id="output">
         <div class="row no-gutters">
-          <div class="heading">Result</div>
+          <div class="heading" id="heading4">Result</div>
           <iframe class="preview" id="preview"></iframe>
         </div>
       </div>
@@ -78,8 +110,128 @@
 
     <!-- Footer Section -->
     <div class="row no-gutters" id="console-bar">
-      <a class="nav-link" href="#"><button class="btn btn-outline-secondary" data-toggle="modal" data-target="#consoleModal"><i class="fas fa-terminal"></i> &nbsp;Console</button></a>
-      <a class="nav-link" href="#"><button class="btn btn-outline-secondary"><i class="fas fa-puzzle-piece"></i> &nbsp;Assets</button></a>
+      <a class="nav-link" href="#"><button class="btn btn-outline-success" data-toggle="modal" data-target="#consoleModal"><i class="fas fa-terminal"></i> &nbsp;Console</button></a>
+      <a class="nav-link" href="#"><button class="btn btn-outline-success"><i class="fas fa-puzzle-piece"></i> &nbsp;Assets</button></a>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-in-alt"></i> &nbsp;Existing User</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form">
+                
+                <div class="col">
+                  <label for="inlineFormInputGroup">Username</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">@</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g. steve_jobs">
+                  </div>
+                </div>
+
+                <div class="col">
+                  <label for="inlineFormInputGroup">Password</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="****">
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Log In</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModallLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus"></i> &nbsp;New User</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form">
+                
+                <div class="col">
+                  <label for="inlineFormInputGroup">Username</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">@</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g. steve_jobs">
+                  </div>
+                </div>
+
+                <div class="col">
+                  <label for="inlineFormInputGroup">Full Name</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fas fa-user"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Steve Jobs">
+                  </div>
+                </div>
+
+                <div class="col">
+                  <label for="inlineFormInputGroup">Email Address</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="steve.jobs@apple.com">
+                  </div>
+                </div>
+
+                <div class="col">
+                  <label for="inlineFormInputGroup">Password</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="****">
+                  </div>
+                </div>
+
+                <div class="col">
+                  <label for="inlineFormInputGroup">Phone Number</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fas fa-phone"></i></div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobile Number">
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Sign Up</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Console Modal -->
@@ -87,7 +239,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h6 class="modal-title" id="exampleModalLabel">Console Window</h6>
+            <h6 class="modal-title" id="exampleModalLabel"><i class="fas fa-terminal"></i> &nbsp;Console Window</h6>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -98,7 +250,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -108,53 +260,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ace.js"></script>
     <script src="https://cloud9ide.github.io/emmet-core/emmet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ext-emmet.js"></script>    
-    <script>
-      // HTML
-      var htmlEditor = ace.edit("html-editor");
-      htmlEditor.setTheme("ace/theme/crimson_editor");
-      htmlEditor.session.setMode("ace/mode/html");
-      htmlEditor.setOption("enableEmmet", true);
-      htmlEditor.session.setTabSize(2);
-      htmlEditor.session.setUseWrapMode(true);
-
-      // CSS
-      var cssEditor = ace.edit("css-editor");
-      cssEditor.setTheme("ace/theme/crimson_editor");
-      cssEditor.session.setMode("ace/mode/css");
-      cssEditor.session.setTabSize(2);
-      cssEditor.session.setUseWrapMode(true);
-
-      // JS
-      var jsEditor = ace.edit("js-editor");
-      jsEditor.setTheme("ace/theme/crimson_editor");
-      jsEditor.session.setMode("ace/mode/javascript");
-      jsEditor.session.setTabSize(2);
-      jsEditor.session.setUseWrapMode(true);
-
-      // Rendering
-      $(document).ready(function() {
-        
-        $('.editor').on('keyup', function() {
-          var html = htmlEditor.getValue();
-          var css = cssEditor.getValue();
-          var js = jsEditor.getValue();
-          var iframeContent = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge">' + '<style>' + css + '</style>' + '</head><body>' + html + '\n<script>' + js + '<\/script>' + '</body></html>';
-          var target = $('#preview')[0].contentWindow.document;
-          target.open();
-          target.write(iframeContent);
-          target.close();
-          console.log($('#preview').contents());
-        });
-
-        // Console
-        var iframeWindow = document.getElementById("preview").contentWindow;
-        iframeWindow.console.log = function(val) {
-          var divId = document.getElementById("console-window");
-          var span = document.createElement("span");
-          span.appendChild(document.createTextNode('\n > '+ val));
-          divId.appendChild(span);
-        };
-      });
-    </script>
+    <script src="pen.js"></script>
   </body>
 </html>
