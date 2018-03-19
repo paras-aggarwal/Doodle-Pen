@@ -1,7 +1,7 @@
 <html lang="en">
   <head>
 
-    <link rel="stylesheet" href="css/pen.css">
+    <link rel="stylesheet" href="/css/pen.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="assets/doodlepen-favicon.png">
@@ -16,7 +16,7 @@
     <title>Doodle Pen : An Online Realtime IDE</title>
 
   </head>
-  <body>
+  <body onload="render()">
 
     <!-- Navbar Section -->
     <div class="row no-gutters">
@@ -27,12 +27,11 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
+
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
-
               <li class="nav-item">
-                <a class="nav-link"><button class="btn code-btn" id="code-btn1" data-toggle="modal" data-target="#linkModal"><i class="fas fa-cloud"></i> &nbsp;Save</button></a>
+                  <a class="nav-link"><button type="button" class="btn code-btn" id="code-btn1" data-toggle="modal" data-target="#linkModal"><i class="fas fa-cloud"></i> &nbsp;Save</button></a>
               </li>
 
               <li class="nav-item">
@@ -65,10 +64,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn5" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus"></i> &nbsp;Sign up</button></a>
               </li>
-
             </ul>
           </div>
         </nav>
+      </div>
+    </div>
+    <!-- Link Modal -->
+    <div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+          <div id="saved-link"></div> 
+          </div>
+        </div>
       </div>
     </div>
 
@@ -79,19 +87,19 @@
         <!-- html editor -->
         <div id="html-box">
           <div class="heading" id="heading1">HTML</div>
-          <div class="editor" id="html-editor"></div>
+          <div class="editor" id="html-editor" name="html" onkeyup="render()"><%if(!data){%><%}else{%><%=data%><%}%></div>
         </div>
         
         <!-- css editor -->
         <div id="css-box">
           <div class="heading" id="heading2">CSS</div>
-          <div class="editor" id="css-editor"></div>
+          <div class="editor" id="css-editor" name="css" onkeyup="render()"><%if(!data1){%><%}else{%><%=data1%><%}%></div>
         </div>  
 
         <!-- js editor -->
         <div id="js-box">
           <div class="heading" id="heading3">JS</div>
-          <div class="editor" id="js-editor"></div>
+          <div class="editor" id="js-editor" name="js" onkeyup="render()"><%if(!data2){%><%}else{%><%=data2%><%}%></div>
         </div>
       </div>
 
@@ -106,18 +114,8 @@
 
     <!-- Footer Section -->
     <div class="row no-gutters" id="console-bar">
-      <a class="nav-link" href="#"><button class="btn btn-outline-success" data-toggle="modal" data-target="#consoleModal"><i class="fas fa-terminal"></i> &nbsp;Console</button></a>
-    </div>
-
-    <!-- Link Modal -->
-    <div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div id="saved-link"></div>
-          </div>
-        </div>
-      </div>
+        <a class="nav-link" href="#"><button class="btn btn-outline-success" data-toggle="modal" data-target="#consoleModal"><i class="fas fa-terminal"></i> &nbsp;Console</button></a>
+      <div id="saved-link"></div> 
     </div>
 
     <!-- Login Modal -->

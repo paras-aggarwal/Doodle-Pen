@@ -26,7 +26,7 @@ nav{
 /*Headers for text editors*/
 .heading{
   width:100%;
-  padding: 3px 0 3px 20px;
+  padding: 1.5px 0 3px 20px;
   background-color: #f3f3f3;
   border: 1px solid #d3d3d3;
   color: #000;
@@ -35,14 +35,15 @@ nav{
 /*Text Editor*/
 #editor-area{
   border-right: 10px solid #efefef;
+  /*height: 90%;*/
 }
 #html-box, #css-box, #js-box{
-  height: 33.33%;
+  height: 17rem;
   box-sizing: border-box;
   overflow: visible;
 }
 #html-editor, #css-editor, #js-editor{
-  height: 89.2%;
+  height: 15.2rem;
   width: 100%;
   font-size: 14px;
 }
@@ -54,7 +55,7 @@ nav{
   margin: 0;
 }
 iframe{
-  height: 96%;
+  height: 49.1rem;
   width: 100%;
   border: none;
   margin-bottom: -0.6%;
