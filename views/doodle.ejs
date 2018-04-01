@@ -16,7 +16,7 @@
     <title>Doodle Pen : An Online Realtime IDE</title>
 
   </head>
-  <body onload="render()">
+  <body onload="render(<%if(!view){%><%}else{%><%=view%><%}%>)">
 
     <!-- Navbar Section -->
     <div class="row no-gutters">
@@ -74,7 +74,14 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-body">
-          <div id="saved-link"></div> 
+            <div id="saved-link">
+              <div class="alert alert-Success" role="alert">Your code is saved as:</div>
+              <div id="resultLink">
+                <div class="alert alert-dark" role="alert" data-toggle="tooltip" data-placement="bottom" title="Click to copy">
+                  <div id="showData">https://doodlepen.herokuapp.com/<span id="link"></span></div>
+                </div>
+              </div>
+            </div> 
           </div>
         </div>
       </div>
@@ -133,22 +140,22 @@
               <div class="form">
                 
                 <div class="col">
-                  <label for="inlineFormInputGroup">Username</label>
+                  <label for="username">Username</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text">@</div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g. steve_jobs">
+                    <input type="text" class="form-control" id="username" placeholder="e.g. steve_jobs">
                   </div>
                 </div>
 
                 <div class="col">
-                  <label for="inlineFormInputGroup">Password</label>
+                  <label for="password">Password</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text"><i class="fas fa-lock"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="****">
+                    <input type="text" class="form-control" id="password" placeholder="****">
                   </div>
                 </div>
 
@@ -174,62 +181,57 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <div id="created"></div>
+            <form id="signup_form" autocomplete="on">
               <div class="form">
-                
-                <div class="col">
-                  <label for="inlineFormInputGroup">Username</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">@</div>
-                    </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g. steve_jobs">
-                  </div>
-                </div>
 
                 <div class="col">
-                  <label for="inlineFormInputGroup">Full Name</label>
+                  <label for="name">Full Name</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text"><i class="fas fa-user"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Steve Jobs">
+                    <input type="text" class="form-control" id="name" placeholder="Steve Jobs" required>
                   </div>
+                  <div id="name_valid"></div>
                 </div>
 
                 <div class="col">
-                  <label for="inlineFormInputGroup">Email Address</label>
+                  <label for="email">Email Address</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="steve.jobs@apple.com">
+                    <input type="email" class="form-control" id="email" placeholder="steve.jobs@apple.com" required>
                   </div>
+                  <div id="email_valid"></div>
                 </div>
 
                 <div class="col">
-                  <label for="inlineFormInputGroup">Password</label>
+                  <label for="password">Password</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text"><i class="fas fa-lock"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="****">
+                    <input type="password" class="form-control" id="pass" placeholder="****" required autocomplete="off">
                   </div>
+                  <div id="pass_valid"></div>
                 </div>
 
                 <div class="col">
-                  <label for="inlineFormInputGroup">Phone Number</label>
+                  <label for="number">Phone Number</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text"><i class="fas fa-phone"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobile Number">
+                    <input type="text" class="form-control" id="number" placeholder="Mobile Number" required> 
                   </div>
+                  <div id="number_valid"></div>
                 </div>
 
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Sign Up</button>
+                <button type="submit" id="signup_btn" class="btn btn-success">Sign Up</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </form>

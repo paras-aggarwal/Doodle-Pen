@@ -90,3 +90,12 @@ iframe{
     display: none;
   }
 }
+#saved-link{
+  display: none;
+}
+#resultData{
+  display: none;
+}
+#showData{
+  display: none;
+}

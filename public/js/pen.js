@@ -1,5 +1,9 @@
+// Global variable to store layout of webpage
+var view;
+
 // Change View
 function changeView(order){
+  view = order;
   var main_row = document.getElementById('main-row');
   var editor_area = document.getElementById('editor-area');
   var output = document.getElementById('output');
@@ -118,19 +122,24 @@ jsEditor.session.setTabSize(2);
 jsEditor.session.setUseWrapMode(true);
 
 // Rendering
-function render() {
-    var html = htmlEditor.getValue();
-    var css = cssEditor.getValue();
-    var js = jsEditor.getValue();
-    var iframeContent = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge">' + '<style>' + css + '</style>' + '</head><body>' + html + '\n<script>' + js + '<\/script>' + '</body></html>';
-    var target = $('#preview')[0].contentWindow.document;
-    target.open();
-    target.write(iframeContent);
-    target.close();
-    console.log($('#preview').contents());
-  };
+function render(order) {
+  changeView(order);
+  var html = htmlEditor.getValue();
+  var css = cssEditor.getValue();
+  var js = jsEditor.getValue();
+  var iframeContent = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge">' + '<style>' + css + '</style>' + '</head><body>' + html + '\n<script>' + js + '<\/script>' + '</body></html>';
+  var target = $('#preview')[0].contentWindow.document;
+  target.open();
+  target.write(iframeContent);
+  target.close();
+  console.log($('#preview').contents());
+};
 
 $(document).ready(function() {
+
+  $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+  });
 
   // Console
   var iframeWindow = document.getElementById("preview").contentWindow;
@@ -149,15 +158,21 @@ $(document).ready(function() {
     $.ajax({
       type: 'POST',
       url: '/save',
-      data: {html: h,css: c, js:j},
+      data: {html: h,css: c, js:j, layout: view},
       success: function(data)
       {
         console.log('key: '+data);
         if(data){
-          $('#saved-link').html('<div class="alert alert-success" role="alert">Your code is saved as:<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><i class="fas fa-link"></i></div></div><input type="text" class="form-control" value=https://doodlepen.herokuapp.com/'+data+' readonly></div></div></div>');
+          $('#saved-link').css('display', 'block');
+          $('#resultData').css('display', 'block');
+          $('#showData').css('display', 'block');
+          $('#link').html(data);
         }
         else{
-          $('#result').html('<div class="alert alert-danger" role="alert">Some error Occured! Could not save your data. Please try again!</div>');
+          $('#saved-link').css('display', 'none');
+          $('#resultData').css('display', 'none');
+          $('#showData').css('display', 'none');
+          $('#saved-link').html('<div class="alert alert-danger" role="alert">Some error Occured! Couldnt save your data</div>');
         }
       },
       error: function(data)
@@ -167,4 +182,49 @@ $(document).ready(function() {
     });
   });
 
+  $('#signup_form').submit(function(e) { 
+    e.preventDefault();
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var password = $('#pass').val();
+    var number = $('#number').val();
+    console.log("username: "+username);
+    console.log("password: "+password);
+    $.ajax({
+      type: "POST",
+      url: "/register",
+      data: {name: name, email: email, password: password, number: number},
+      success: function(data)
+      {
+        if(data == "email_found") {
+          $('#created').html('<div class="alert alert-danger" role="alert">Email is already registered!</div>');
+        }
+        if(data == "success") {
+          $('#created').html('<div class="alert alert-success" role="alert">Account successfully created! </div>');
+        }
+      },
+      error: function(data)
+      {
+        console.log("Couldn't create your account!");        
+      }
+    });
+  });
+
+});
+
+const link = document.querySelector("#showData");
+link.onclick = function() {
+  document.execCommand("copy");
+}
+link.addEventListener("copy", function(event) {
+  event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", link.textContent);
+        console.log(event.clipboardData.getData("text"))
+        $('[data-toggle="tooltip"]').tooltip('dispose')
+        $(this).tooltip('hide')
+        .attr('title', 'Copied')
+        .attr('data-placement', 'bottom')
+        .tooltip('show');
+    }
 });
