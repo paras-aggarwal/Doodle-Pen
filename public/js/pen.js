@@ -181,35 +181,7 @@ $(document).ready(function() {
       }
     });
   });
-
-  $('#signup_form').submit(function(e) { 
-    e.preventDefault();
-    var name = $('#name').val();
-    var email = $('#email').val();
-    var password = $('#pass').val();
-    var number = $('#number').val();
-    console.log("username: "+username);
-    console.log("password: "+password);
-    $.ajax({
-      type: "POST",
-      url: "/register",
-      data: {name: name, email: email, password: password, number: number},
-      success: function(data)
-      {
-        if(data == "email_found") {
-          $('#created').html('<div class="alert alert-danger" role="alert">Email is already registered!</div>');
-        }
-        if(data == "success") {
-          $('#created').html('<div class="alert alert-success" role="alert">Account successfully created! </div>');
-        }
-      },
-      error: function(data)
-      {
-        console.log("Couldn't create your account!");        
-      }
-    });
-  });
-
+  
 });
 
 const link = document.querySelector("#showData");

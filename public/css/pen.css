@@ -99,3 +99,9 @@ iframe{
 #showData{
   display: none;
 }
+
+#head{
+  font-family: 'Permanent Marker', cursive;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}

@@ -1,4 +1,5 @@
 var express = require('express');
+var bcrypt = require('bcrypt');
 var app = express();
 
 app.set('view engine', 'ejs');
@@ -23,11 +24,9 @@ var codeSchema = mongoose.Schema({
 var Code = mongoose.model('Code', codeSchema);
 
 var doodleRegister = mongoose.Schema({
-	username: String,
 	name: String,
 	email: String,
-	password: String,
-	number: Number 
+	password: String
 });
 
 var register = mongoose.model('register', doodleRegister);
@@ -40,30 +39,55 @@ app.use(express.static(__dirname + '/static'));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-	res.render('doodle',{data: "", data1: "", view: 1, data2: ""});
+	res.render('doodle', {data: "", data1: "", view: 1, data2: ""});
+});
+
+app.get('/login', function(req, res){
+	res.render('login');
+});
+
+app.post('/login', function(req, res){
+	var email = req.body.email;
+	var password = req.body.password;
+	register.findOne({email: email}, function(err, found){
+		if(err) {
+			throw err;
+		}
+		if(!found) {
+			res.send('wrong');
+			return console.log('wrong credentials');
+		}
+		if(found.password != password) {
+			res.send('wrong');
+			return console.log('wrong credentials');
+		}
+		res.send('success');
+	});
+});
+
+app.get('/register', function(req, res){
+	res.render('register');
 });
 
 app.post('/register', function(req, res){
-	var user = req.body.username;
 	var name = req.body.name;
 	var email = req.body.email;
-	var pass = req.body.password;
-	var num = req.body.number;
-
-	register.findOne({email: email},function (err, success) {
-		if(success){
-			res.send("email_found");
+	var password = req.body.password;
+	// var newUser;
+	// bcrypt.hash('password', 10, function(err, hash) {
+	// 	console.log(hash);
+ //  		password = hash;
+  		
+	// });
+	var newUser = new register({name: name, email: email, password: password});
+	register.findOne({email: email}, function(err, found){
+		if(found) {
+			res.send('exist');
+			return console.log('email exist');
 		}
-	});
-
-	var newUser = new register({username: user, name: name, email: email, password: pass, number: num});
-	newUser.save(function(err, success) {
-		if(err) {
-			return console.error(err);
-		}
-		else {
-			res.send("success");
-		}
+		newUser.save(function(err, success){
+			res.send(success);
+		});
 	});
 });
 

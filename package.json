@@ -4,9 +4,17 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
     "ejs": "^2.5.7",
     "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-validator": "^5.1.0",
+    "express-validators": "^1.0.4",
+    "flash": "^1.1.0",
+    "handlebars": "^4.0.11",
     "mongoose": "^5.0.10"
   },
   "devDependencies": {},

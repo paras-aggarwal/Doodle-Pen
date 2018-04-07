@@ -58,11 +58,11 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn4" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i> &nbsp;Log in</button></a>
+                <a class="nav-link" href="/login"><button class="btn code-btn" id="code-btn4"><i class="fas fa-sign-in-alt"></i> &nbsp;Log in</button></a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="#"><button class="btn code-btn" id="code-btn5" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus"></i> &nbsp;Sign up</button></a>
+                <a class="nav-link" href="/register"><button class="btn code-btn" id="code-btn5"><i class="fas fa-user-plus"></i> &nbsp;Sign up</button></a>
               </li>
             </ul>
           </div>
@@ -123,121 +123,6 @@
     <div class="row no-gutters" id="console-bar">
         <a class="nav-link" href="#"><button class="btn btn-outline-success" data-toggle="modal" data-target="#consoleModal"><i class="fas fa-terminal"></i> &nbsp;Console</button></a>
       <div id="saved-link"></div> 
-    </div>
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title" id="exampleModalLabel"><i class="fas fa-sign-in-alt"></i> &nbsp;Existing User</h6>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form">
-                
-                <div class="col">
-                  <label for="username">Username</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">@</div>
-                    </div>
-                    <input type="text" class="form-control" id="username" placeholder="e.g. steve_jobs">
-                  </div>
-                </div>
-
-                <div class="col">
-                  <label for="password">Password</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="fas fa-lock"></i></div>
-                    </div>
-                    <input type="text" class="form-control" id="password" placeholder="****">
-                  </div>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Log In</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModallLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h6 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus"></i> &nbsp;New User</h6>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div id="created"></div>
-            <form id="signup_form" autocomplete="on">
-              <div class="form">
-
-                <div class="col">
-                  <label for="name">Full Name</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="fas fa-user"></i></div>
-                    </div>
-                    <input type="text" class="form-control" id="name" placeholder="Steve Jobs" required>
-                  </div>
-                  <div id="name_valid"></div>
-                </div>
-
-                <div class="col">
-                  <label for="email">Email Address</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="fas fa-envelope"></i></div>
-                    </div>
-                    <input type="email" class="form-control" id="email" placeholder="steve.jobs@apple.com" required>
-                  </div>
-                  <div id="email_valid"></div>
-                </div>
-
-                <div class="col">
-                  <label for="password">Password</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="fas fa-lock"></i></div>
-                    </div>
-                    <input type="password" class="form-control" id="pass" placeholder="****" required autocomplete="off">
-                  </div>
-                  <div id="pass_valid"></div>
-                </div>
-
-                <div class="col">
-                  <label for="number">Phone Number</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="fas fa-phone"></i></div>
-                    </div>
-                    <input type="text" class="form-control" id="number" placeholder="Mobile Number" required> 
-                  </div>
-                  <div id="number_valid"></div>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                <button type="submit" id="signup_btn" class="btn btn-success">Sign Up</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Console Modal -->
