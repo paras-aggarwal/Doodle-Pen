@@ -65,6 +65,7 @@ $('#signup_form').submit(function(e) {
       $('#msgs').html("<div class='alert alert-danger' role='alert'>Couldn't connect to server!</div>");
     }
   });
+  
 });
 
 $('#login_form').submit(function(e) {

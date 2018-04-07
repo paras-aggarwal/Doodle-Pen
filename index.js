@@ -1,13 +1,12 @@
 var express = require('express');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
+var mongoose = require('mongoose');
 var app = express();
 
 app.set('view engine', 'ejs');
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://paras:paras@ds211029.mlab.com:11029/paras_db');
+mongoose.connect('< mongoDB connection string >');
 var db = mongoose.connection;
-
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
 	console.log("Connected To MLab cloud database");
