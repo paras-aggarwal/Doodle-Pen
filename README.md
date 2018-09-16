@@ -2,6 +2,7 @@
 > An Online IDE by Paras Aggarwal
 
 Doodle Pen is an Online IDE for Developers, where one can play with the three core elements of web development i.e. HTML, CSS, JS.
+[See Demo](http://doodlepen.herokuapp.com/)
 
 ### Technology Stack
 
