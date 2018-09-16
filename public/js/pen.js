@@ -47,7 +47,6 @@ var heading1 = document.getElementById('heading1');
 var heading2 = document.getElementById('heading2');
 var heading3 = document.getElementById('heading3');
 var heading4 = document.getElementById('heading4');
-var master = document.getElementById('master');
 var code_btn1 = document.getElementById('code-btn1');
 var code_btn3 = document.getElementById('code-btn3');
 var code_btn4 = document.getElementById('code-btn4');
@@ -59,7 +58,6 @@ var console_bar = document.getElementById('console-bar');
 function lowVision(){
   header.removeAttribute('class');
   header.setAttribute('class', 'navbar navbar-expand-lg navbar-dark bg-dark');
-  master.setAttribute('style', 'color: #fff;');
   heading1.setAttribute('style', 'border: none; background-color: #454545; color: #fff;');
   heading2.setAttribute('style', 'border: none; background-color: #454545; color: #fff;');
   heading3.setAttribute('style', 'border: none; background-color: #454545; color: #fff;');
@@ -82,7 +80,6 @@ function fullVision(){
   header.setAttribute('style', 'background-color: #f5f5f5;');
   header.removeAttribute('class');
   header.setAttribute('class', 'navbar navbar-expand-lg navbar-light');
-  master.removeAttribute('style');
   heading1.setAttribute('style', 'background-color: #f3f3f3; color: #000;');
   heading2.setAttribute('style', 'background-color: #f3f3f3; color: #000;');
   heading3.setAttribute('style', 'background-color: #f3f3f3; color: #000;');
@@ -166,7 +163,7 @@ $(document).ready(function() {
           $('#saved-link').css('display', 'block');
           $('#resultData').css('display', 'block');
           $('#showData').css('display', 'block');
-          $('#link').html(data);
+          $('#showData').val('http://doodlepen.herokuapp.com/' + data);
         }
         else{
           $('#saved-link').css('display', 'none');
@@ -184,19 +181,8 @@ $(document).ready(function() {
   
 });
 
-const link = document.querySelector("#showData");
-link.onclick = function() {
-  document.execCommand("copy");
+function copyToClipboard() {
+	var copyText = document.getElementById("showData");
+	copyText.select();
+ 	document.execCommand("copy");
 }
-link.addEventListener("copy", function(event) {
-  event.preventDefault();
-    if (event.clipboardData) {
-        event.clipboardData.setData("text/plain", link.textContent);
-        console.log(event.clipboardData.getData("text"))
-        $('[data-toggle="tooltip"]').tooltip('dispose')
-        $(this).tooltip('hide')
-        .attr('title', 'Copied')
-        .attr('data-placement', 'bottom')
-        .tooltip('show');
-    }
-});
