@@ -127,13 +127,15 @@ app.get('/:link', function(req, res){
 	var link = req.params.link;
 	Code.findOne({key:link},function (err, key) {
 		//console.log(key);
-        if(key)
+		if (err)
+			return console.error(err);
+        else if(key)
         {
         	console.log(key.layout);
         	res.render('doodle',{data: key.html, data1: key.css, view: key.layout, data2: key.js});
         }
-        else if (err)
-        	return console.error(err);
+		else
+			res.render('error');
     });
 });
 
