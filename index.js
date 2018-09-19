@@ -36,8 +36,8 @@ app.use(function(req ,res , next){
     res.locals.success= req.flash("success");
     next();
 });
-
 passport.use(new localStatergy(user.authenticate()));
+
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser()); 
 
@@ -51,8 +51,11 @@ var codeSchema = mongoose.Schema({
 
 var Code = mongoose.model('Code', codeSchema);
 
-app.get('/', require('connect-ensure-login').ensureLoggedIn(), function(req, res){
-	res.render('doodle', {data: "", data1: "", view: 1, data2: ""});
+app.get('/', function(req, res){
+	if(!req.user)
+		res.redirect('/login?url=/');
+	else
+		res.render('doodle', {data: "", data1: "", view: 1, data2: ""});
 });
 
 app.get('/login', function(req, res){
@@ -60,7 +63,7 @@ app.get('/login', function(req, res){
 });
 
 app.post('/login', passport.authenticate("local", {
-	successRedirect:"/", failureRedirect:"/login", failureFlash :true
+	successRedirect:'/', failureRedirect:"/login", failureFlash :true
 }), function(req , res) {
 });
 
@@ -83,10 +86,6 @@ app.post('/register', function(req, res) {
 		}
 		req.flash("success" , "You are successfully registered!");
         res.redirect("/login");
-        // passport.authenticate("local")(req , res , function(){
-        //     req.flash("success" , "You are logged in" + user.username);
-        //     res.redirect("/");
-        // });
     });
 });
 
@@ -99,18 +98,17 @@ app.get('/logout', function(req, res) {
 app.post('/save', function(req, res){
 	function makeId(){
 		var text = "";
-    	var combination = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    	var combination = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_";
     	for(var i=0; i < 7; i++)
         	text += combination.charAt(Math.floor(Math.random() * combination.length));
     	return text;
 	}
-
-	console.log("redirect success");
 	var h = req.body.html;
 	var c = req.body.css;
 	var j = req.body.js;
 	var v = req.body.layout;
 	var k = makeId();
+	console.log(v);
 	console.log('key generated: '+k)
 	var newCode = new Code({html: h, css: c, js: j, layout: v, key: k});
 	newCode.save(function(err, testEvent) {
@@ -126,7 +124,6 @@ app.post('/save', function(req, res){
 app.get('/:link', function(req, res){
 	var link = req.params.link;
 	Code.findOne({key:link},function (err, key) {
-		//console.log(key);
 		if (err)
 			return console.error(err);
         else if(key)
@@ -140,5 +137,5 @@ app.get('/:link', function(req, res){
 });
 
 app.listen(process.env.PORT || 3000, function(){
-	console.log('Server is up and running');
+	console.log('Server started at port 3000');
 });

@@ -3,7 +3,6 @@ var view;
 
 // Change View
 function changeView(order){
-  view = order;
   var main_row = document.getElementById('main-row');
   var editor_area = document.getElementById('editor-area');
   var output = document.getElementById('output');
@@ -13,6 +12,7 @@ function changeView(order){
   
   // Left View
   if(order == 1){
+    view = 1;
     main_row.setAttribute('class', 'row no-gutters');
     html_box.removeAttribute('class');
     css_box.removeAttribute('class');
@@ -23,6 +23,7 @@ function changeView(order){
 
   // Right View
   else if(order == 2){
+    view = 2;
     main_row.setAttribute('class', 'row no-gutters');
     html_box.removeAttribute('class');
     css_box.removeAttribute('class');
@@ -33,6 +34,7 @@ function changeView(order){
 
   // Top View
   else if(order == 3){
+    view = 3;
     main_row.removeAttribute('class');
     editor_area.setAttribute('class', 'row no-gutters');
     html_box.setAttribute('class', 'col-md-4');
@@ -152,10 +154,12 @@ $(document).ready(function() {
     var h = htmlEditor.getValue();
     var c = cssEditor.getValue();
     var j = jsEditor.getValue();
+    var l = view;
+    console.log('view: '+l);
     $.ajax({
       type: 'POST',
       url: '/save',
-      data: {html: h,css: c, js:j, layout: view},
+      data: {html: h,css: c, js:j, layout: l},
       success: function(data)
       {
         console.log('key: '+data);
