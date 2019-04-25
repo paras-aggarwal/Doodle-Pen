@@ -11,7 +11,7 @@ var app = express();
 
 app.set('view engine', 'ejs');
 
-mongoose.connect('mongodb://paras:paras@ds211029.mlab.com:11029/paras_db');
+mongoose.connect(MONGODB_CONNECTION_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
