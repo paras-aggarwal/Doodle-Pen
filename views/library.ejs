@@ -1,0 +1,110 @@
+ <html>
+  <head>
+    
+    <title>
+      Library | Doodle Pen: An Online IDE by Paras Aggarwal
+    </title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#4ca77b">
+    <link rel="icon" href="assets/dockurl-favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/library.css">
+    <script src="/js/library.js"></script>
+  </head>
+  <body>
+    
+    <!-- Navbar Section -->
+    <div class="row no-gutters">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light" id="nav">
+          <a class="navbar-brand" href="/library"><img id="logo" src="assets/logo-doodlepen.png" class="img-responsive" height="60" width="150" alt="Doodle Pen" title="Doodle Pen: An Online Realtime IDE"></a>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="/" class="nav-link"><button type="button" class="btn code-btn" id="code-btn1"><i class="fas fa-plus"></i> &nbsp;New</button></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"><button class="btn code-btn" id="code-btn1"><i class="fas fa-sign-in-alt"></i> &nbsp;Logout</button></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+    
+    <div class="row">
+      <% if(key.length == 0) { %>
+        <div class="col-md-12" id="errorName">Nothing to show</div></center>
+      <% } else { %>
+        <% for (i in key) { %>
+          <div class="col-md-3">
+            <div class="card mx-auto" style="width: 18rem;">
+              <iframe class="preview1" id="preview1" name="preview1"></iframe>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <% if(!key[i].title || key[i].title == ""){ %>
+                    Title not provided 
+                  <% } else { %>
+                    <%=key[i].title %>
+                  <% } %>
+                </h5>
+              </div>
+              <a href="/<%=key[i].key%>" class="btn btn-success">View</a>
+            </div>
+          </div>
+          <script type="text/javascript">
+            var index = <%- JSON.stringify(i) %>;
+            var htmlContent = <%- JSON.stringify(key[i].html) %>
+            var cssContent = <%- JSON.stringify(key[i].css) %>
+            var jsContent = <%- JSON.stringify(key[i].js) %>
+            render1(index, htmlContent, cssContent, jsContent);
+          </script>
+        <% } %>
+      <% } %>
+    </div>
+
+    <!-- <div class="row" style="width:100%">
+      <% if(key.length == 0) { %>
+        <div class="col-md-12" id="errorName">Nothing to show</div></center>
+      <% } else { %>
+        <% for (i in key) { %>
+          <div class=" col-md-3 col-sm-3 col-xs-3 card" style="margin-left: 50px ; margin-top:50px">
+            <div class="card-body">
+              <h5 class="card-title">
+                <% if(!key[i].title || key[i].title == ""){ %>
+                  Title not provided 
+                <% } else { %>
+                  <%=key[i].title %>
+                <% } %>
+              </h5>
+              <iframe class="preview1" id="preview1" name="preview1"></iframe>
+              <a href="/<%=key[i].key%>" class="btn btn-success">View</a>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+            var index = <%- JSON.stringify(i) %>;
+            var htmlContent = <%- JSON.stringify(key[i].html) %>
+            var cssContent = <%- JSON.stringify(key[i].css) %>
+            var jsContent = <%- JSON.stringify(key[i].js) %>
+            render1(index, htmlContent, cssContent, jsContent);
+          </script>
+        <% } %>
+      <% } %>
+    </div> -->
+
+  </body>
+</html>

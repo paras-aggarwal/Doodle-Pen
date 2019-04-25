@@ -46,14 +46,16 @@ var codeSchema = mongoose.Schema({
 	css: String,
 	js: String,
 	layout: Number,
-	key: String
+	key: String,
+	title : String,
+	createdBy: String
 });
 
 var Code = mongoose.model('Code', codeSchema);
 
 app.get('/', function(req, res){
 	if(!req.user)
-		res.redirect('/login?url=/');
+		res.redirect('/login?url=/library');
 	else
 		res.render('doodle', {data: "", data1: "", view: 1, data2: ""});
 });
@@ -63,7 +65,7 @@ app.get('/login', function(req, res){
 });
 
 app.post('/login', passport.authenticate("local", {
-	successRedirect:'/', failureRedirect:"/login", failureFlash :true
+	successRedirect:'/library', failureRedirect:"/login", failureFlash :true
 }), function(req , res) {
 });
 
@@ -107,10 +109,14 @@ app.post('/save', function(req, res){
 	var c = req.body.css;
 	var j = req.body.js;
 	var v = req.body.layout;
+	var title = req.body.title;
+	var createdBy = "";
+	if(req.user)
+		createdBy = req.user.username;
 	var k = makeId();
-	console.log(v);
-	console.log('key generated: '+k)
-	var newCode = new Code({html: h, css: c, js: j, layout: v, key: k});
+	console.log("title: "+title);
+	console.log('key generated: '+k);
+	var newCode = new Code({html: h, css: c, js: j, layout: v, key: k, title: title, createdBy: createdBy});
 	newCode.save(function(err, testEvent) {
   		if (err) 
   			return console.error(err);
@@ -121,6 +127,20 @@ app.post('/save', function(req, res){
 	});
 });
 
+app.get('/library', function(req, res){
+	if(!req.user)
+		res.redirect('/login?url=/library');
+	else {
+		Code.find({createdBy: req.user.username}, function (err, key) {
+			if (err)
+				return console.error('Oops! We got an error '+err);
+			else if(key)
+				res.render('library',{key:key});
+			else
+				res.render('error');
+		});
+	}
+});
 app.get('/:link', function(req, res){
 	var link = req.params.link;
 	Code.findOne({key:link},function (err, key) {

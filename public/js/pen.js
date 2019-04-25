@@ -50,6 +50,7 @@ var heading2 = document.getElementById('heading2');
 var heading3 = document.getElementById('heading3');
 var heading4 = document.getElementById('heading4');
 var code_btn1 = document.getElementById('code-btn1');
+var code_btn2 = document.getElementById('code-btn2');
 var code_btn3 = document.getElementById('code-btn3');
 var code_btn4 = document.getElementById('code-btn4');
 var code_btn5 = document.getElementById('code-btn5');      
@@ -71,6 +72,7 @@ function lowVision(){
   editor_area.setAttribute('style', 'border-right: 10px solid #595959');
   console_bar.setAttribute('style', 'background-color: #343a40');
   code_btn1.setAttribute('style', 'background-color: #343a40; color: #fff');
+  code_btn2.setAttribute('style', 'background-color: #343a40; color: #fff');
   code_btn3.setAttribute('style', 'background-color: #343a40; color: #fff');
   code_btn4.setAttribute('style', 'background-color: #343a40; color: #fff');
   code_btn5.setAttribute('style', 'background-color: #343a40; color: #fff');
@@ -93,6 +95,7 @@ function fullVision(){
   editor_area.setAttribute('style', 'border-right: 10px solid #efefef;');
   console_bar.setAttribute('style', 'background-color: #f5f5f5;');
   code_btn1.setAttribute('style', 'background-color: #f5f5f5; color: #000');
+  code_btn2.setAttribute('style', 'background-color: #f5f5f5; color: #000');
   code_btn3.setAttribute('style', 'background-color: #f5f5f5; color: #000');
   code_btn4.setAttribute('style', 'background-color: #f5f5f5; color: #000');
   code_btn5.setAttribute('style', 'background-color: #f5f5f5; color: #000');
@@ -150,16 +153,17 @@ $(document).ready(function() {
   };
 
   // Save
-  $('#code-btn1').click(function(){
+  $('#saveTitle-btn').click(function(){
+    var title = $("#codeTitle").val();
     var h = htmlEditor.getValue();
     var c = cssEditor.getValue();
     var j = jsEditor.getValue();
     var l = view;
-    console.log('view: '+l);
+    console.log("title: "+title);
     $.ajax({
       type: 'POST',
       url: '/save',
-      data: {html: h,css: c, js:j, layout: l},
+      data: {html: h,css: c, js:j, layout: l, title: title},
       success: function(data)
       {
         console.log('key: '+data);

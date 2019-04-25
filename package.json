@@ -19,6 +19,7 @@
     "flash-messages": "0.0.4",
     "handlebars": "^4.0.11",
     "mongoose": "^5.0.10",
+    "nodemon": "^1.18.11",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth2": "^0.1.6",
