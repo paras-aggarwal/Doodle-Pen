@@ -57,7 +57,7 @@ app.get('/', function(req, res){
 	if(!req.user)
 		res.redirect('/login?url=/library');
 	else
-		res.render('doodle', {data: "", data1: "", view: 1, data2: ""});
+		res.redirect('/library');
 });
 
 app.get('/login', function(req, res){
